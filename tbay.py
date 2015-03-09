@@ -68,8 +68,18 @@ bid2From2 = Bid(price=9, bidder=user2, targetItem=baseBall)
 bid1From3 = Bid(price=12, bidder=user3, targetItem=baseBall)
 bid2From3 = Bid(price=13, bidder=user3, targetItem=baseBall)
 session.add_all([user1,user2,user3,baseBall,bid1From1,bid2From1,bid1From2,bid2From2,bid1From3,bid2From3])
-bids_list = session.query(Bid.price).order_by(Bid.price.desc()).all()
-print bids_list[0]
+#querys in alchemy require getting used to
+#session.query(User).all() returns a list of User objects
+#session.query(User).get(1) returns a single User object
+#session.query(User.username).all() returns a list of tuples with username as first item
+#session.query(User).get(1).username returns a string
+#session.query(User.username).get(1) returns an error
+
+
+# the code below inexplicably returns duplicate lists with bid as first item and a boolean value as second item!
+bids_list = session.query(Bid.price, Bid.bidder).order_by(Bid.price.desc()).all()
+print bids_list
+
 session.commit()
 
    
