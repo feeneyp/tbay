@@ -12,9 +12,12 @@ Base = declarative_base()
 
 from datetime import datetime
 
-from sqlalchemy import Column, Integer, String, DateTime
+from sqlalchemy import Column, Integer, Float, String, DateTime
 
-class Item(Base):
+#this is the class for individual items sold on tbay
+#contrary to appearances it is not the class for the table that lists the items
+#the properties (id, name etc) are properties of Item objects
+class Item(Base):  
     __tablename__ = "items"
 
     id = Column(Integer, primary_key=True)
@@ -35,7 +38,6 @@ class Bid(Base):
 
     id = Column(Integer, primary_key=True)
     price = Column(Float, nullable=False)
-    
    
     
 Base.metadata.create_all(engine)    
